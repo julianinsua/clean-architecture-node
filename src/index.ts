@@ -1,7 +1,4 @@
-import consolear from 'src/consolear'
+import App from 'src/App'
 
-const func = (str: string): void => {
-  consolear(str)
-}
-
-func('I dont think so')
+const app = new App()
+app.start()
