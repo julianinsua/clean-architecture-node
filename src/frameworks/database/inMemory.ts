@@ -1,9 +1,11 @@
+import { iOrder } from 'src/entities/Order'
+import { type iProduct } from 'src/entities/Product'
 import type { user } from 'src/entities/User'
 
 export interface iDatabase {
 	users: user[]
-	products: unknown[]
-	orders: unknown[]
+	products: iProduct[]
+	orders: iOrder[]
 }
 
 class Db implements iDatabase {

@@ -1,5 +1,5 @@
-import usersRepo from '../../../src/frameworks/repositories/inMemory/usersRepo'
-import { User, genders, user } from '../../../src/entities/User'
+import usersRepo from '../../../src/frameworks/repositories/inMemory/users.repo'
+import { genders, user } from '../../../src/entities/User'
 import Chance from 'chance'
 import { v4 } from 'uuid'
 
