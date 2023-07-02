@@ -2,21 +2,21 @@ import { v4 } from 'uuid'
 
 export class User {
 	private readonly id: string
-	private lastName: string
-	private firstName: string
+	private lastName?: string
+	private firstName?: string
 	private gender?: genders
 	private email: string
 	private meta?: Record<string, unknown>
 
 	constructor({
-		id,
+		id = v4(),
 		firstName = '',
 		lastName = '',
 		gender = genders.NOT_SPECIFIED,
 		email,
 		meta = undefined,
 	}: user) {
-		this.id = id ?? v4()
+		this.id = id
 		this.firstName = firstName
 		this.lastName = lastName
 		this.gender = gender
@@ -24,14 +24,30 @@ export class User {
 		this.meta = meta
 	}
 
+	public toObj(): user {
+		return {
+			id: this.id,
+			firstName: this.firstName,
+			lastName: this.lastName,
+			gender: this.gender,
+			email: this.email,
+			meta: this.meta,
+		}
+	}
+
 	public get fullName(): string {
-		if (this.firstName !== '' && this.lastName !== '') {
+		if (
+			this.firstName !== undefined &&
+			this.lastName !== undefined &&
+			this.firstName !== '' &&
+			this.lastName !== ''
+		) {
 			return `${this.firstName} ${this.lastName}`
 		}
-		if (this.firstName !== '') {
+		if (this.firstName !== undefined && this.firstName !== '') {
 			return this.firstName
 		}
-		if (this.lastName !== '') {
+		if (this.lastName !== undefined && this.lastName !== '') {
 			return this.lastName
 		}
 		return ''
@@ -89,7 +105,7 @@ export enum genders {
 }
 
 export interface user {
-	id: string
+	id?: string
 	firstName?: string
 	lastName?: string
 	gender?: genders

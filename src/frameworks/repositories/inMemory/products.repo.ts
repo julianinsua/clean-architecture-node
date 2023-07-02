@@ -1,7 +1,7 @@
 import { type iProduct } from 'src/entities/Product'
 import { type iDatabase, inMemoryDB } from 'src/frameworks/database/inMemory'
 
-class ProductsRepo {
+export class ProductsRepo {
 	private readonly database: iDatabase
 
 	public constructor(database: iDatabase) {

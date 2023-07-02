@@ -27,7 +27,7 @@ describe('Users Repository', () => {
 		expect(addedUser.meta).toEqual(testUser.meta)
 
 		// Check get method
-		const foundUser = await usersRepo.getById(testUser.id)
+		const foundUser = await usersRepo.getById(testUser.id as string)
 		expect(foundUser).toEqual(testUser)
 	})
 
@@ -42,7 +42,7 @@ describe('Users Repository', () => {
 		}
 		await usersRepo.add(user1)
 
-		const updateUser1 = {...user1, lastName: chance.last()}
+		const updateUser1 = { ...user1, lastName: chance.last() }
 		await usersRepo.update(updateUser1)
 		const updatedUser = await usersRepo.getById(user1.id)
 		expect(updatedUser?.lastName).toBe(updateUser1.lastName)

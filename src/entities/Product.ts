@@ -27,6 +27,18 @@ export class Product {
 		this.meta = meta
 	}
 
+	public toObj(): iProduct {
+		return {
+			id: this.id,
+			name: this.name,
+			description: this.description,
+			images: this.images,
+			price: this.price,
+			color: this.color,
+			meta: { ...this.meta },
+		}
+	}
+
 	// GETTERS & SETTERS
 	public get productId(): string {
 		return this.id

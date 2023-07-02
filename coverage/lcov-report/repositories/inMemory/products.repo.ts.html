@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for frameworks/repositories/inMemory/orders.repo.ts</title>
+    <title>Code coverage report for repositories/inMemory/products.repo.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">frameworks/repositories/inMemory</a> orders.repo.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">repositories/inMemory</a> products.repo.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -102,7 +102,8 @@
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,6 +129,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -141,45 +143,46 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { type iOrder } from 'src/entities/Order'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { type iProduct } from 'src/entities/Product'
 import { type iDatabase, inMemoryDB } from 'src/frameworks/database/inMemory'
 &nbsp;
-class OrdersRepo {
+class ProductsRepo {
 	private readonly database: iDatabase
 &nbsp;
 	public constructor(database: iDatabase) {
 		this.database = database
 	}
 &nbsp;
-	public async add(order: iOrder): Promise&lt;iOrder | undefined&gt; {
-		this.database.orders.push(order)
-		return order
+	async add(product: iProduct): Promise&lt;iProduct&gt; {
+		this.database.products.push(product)
+		return product
 	}
 &nbsp;
-	public async update(order: iOrder): Promise&lt;iOrder | undefined&gt; {
-		const index = this.database.orders.findIndex((dbOrder) =&gt; dbOrder.id === order.id)
+	async update(product: iProduct): Promise&lt;iProduct | undefined&gt; {
+		const index = this.database.products.findIndex((dbProduct) =&gt; dbProduct.id === product.id)
 		if (index &gt;= 0) {
-			this.database.orders[index] = order
-			return order
+			this.database.products[index] = product
+			return product
 		}
 <span class="cstat-no" title="statement not covered" >		return undefined</span>
 	}
 &nbsp;
-	public async delete(orderId: string): Promise&lt;string | undefined&gt; {
-		const index = this.database.orders.findIndex((dbOrder) =&gt; dbOrder.id === orderId)
+	async delete(productId: string): Promise&lt;string | undefined&gt; {
+		const index = this.database.products.findIndex((dbProduct) =&gt; dbProduct.id === productId)
+&nbsp;
 		if (index &gt;= 0) {
-			this.database.orders.splice(index, 1)
-			return orderId
+			this.database.products.splice(index, 1) // change the original array
+			return productId
 		}
 <span class="cstat-no" title="statement not covered" >		return undefined</span>
 	}
 &nbsp;
-	public async getById(orderId: string): Promise&lt;iOrder | undefined&gt; {
-		return this.database.orders.find((dbOrder) =&gt; dbOrder.id === orderId)
+	async getById(productId: string): Promise&lt;iProduct | undefined&gt; {
+		return this.database.products.find((dbProduct) =&gt; dbProduct.id === productId)
 	}
 }
 &nbsp;
-export default new OrdersRepo(inMemoryDB)
+export default new ProductsRepo(inMemoryDB)
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -187,16 +190,16 @@ export default new OrdersRepo(inMemoryDB)
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-07-02T17:00:41.053Z
+                at 2023-06-24T22:52:02.459Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

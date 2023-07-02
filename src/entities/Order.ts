@@ -7,12 +7,22 @@ export class Order {
 	private isPayed?: boolean
 	private date?: Date
 
-	constructor({ id = v4(), userId, productIds, isPayed = false, date = Date.now() }: iOrder) {
+	constructor({ id = v4(), userId, productIds, isPayed = false, date = new Date() }: iOrder) {
 		this.id = id
 		this.userId = userId
 		this.productIds = [...productIds]
 		this.isPayed = isPayed
 		this.date = date
+	}
+
+	public toObj(): iOrder {
+		return {
+			id: this.id,
+			userId: this.userId,
+			productIds: [...this.productIds],
+			isPayed: this.isPayed,
+			date: this.date,
+		}
 	}
 
 	public addProductId(productId: string): void {
@@ -56,6 +66,6 @@ export interface iOrder {
 	id: string
 	userId: string
 	productIds: string[]
-	isPayed: boolean
-	date: Date
+	isPayed?: boolean
+	date?: Date
 }
