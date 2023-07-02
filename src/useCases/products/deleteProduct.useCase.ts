@@ -1,0 +1,23 @@
+import type { iProduct } from 'src/entities/Product'
+import type { iRepo, iUseCase } from 'src/frameworks/repositories/contracts'
+
+export class DeleteProduct implements iUseCase<string, string | undefined> {
+	private readonly productRepo: iRepo<iProduct>
+
+	constructor(productRepo: iRepo<iProduct>) {
+		if (productRepo === undefined) {
+			throw new Error('Forgot the productRepo on the Get Product By Id use case.')
+		}
+
+		this.productRepo = productRepo
+	}
+
+	public async execute(productId: string): Promise<string | undefined> {
+		if (this.productRepo.delete === undefined) {
+			throw new Error("There's no delete method on the repo")
+		}
+
+		const dbProductId = await this.productRepo.delete(productId)
+		return dbProductId
+	}
+}
