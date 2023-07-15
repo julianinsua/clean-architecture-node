@@ -1,10 +1,11 @@
 import type { iOrder } from 'src/entities/Order'
-import type { iRepo, iUseCase } from 'src/frameworks/repositories/contracts'
+import type { iUseCase } from 'src/frameworks/repositories/contracts'
+import type { OrdersRepo } from 'src/frameworks/repositories/inMemory/orders.repo'
 
 export class UpdateOrder implements iUseCase<iOrder, iOrder | undefined> {
-	private readonly orderRepo: iRepo<iOrder>
+	private readonly orderRepo: OrdersRepo
 
-	constructor(orderRepo: iRepo<iOrder>) {
+	constructor(orderRepo: OrdersRepo) {
 		if (orderRepo === undefined) {
 			throw new Error('Forgot the product repo on the Add Product use case.')
 		}

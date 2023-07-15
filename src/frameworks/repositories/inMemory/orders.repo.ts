@@ -1,14 +1,18 @@
 import { type iOrder } from 'src/entities/Order'
 import { type iDatabase, inMemoryDB } from 'src/frameworks/database/inMemory'
+import { v4 } from 'uuid'
 
-class OrdersRepo {
+export class OrdersRepo {
 	private readonly database: iDatabase
 
 	public constructor(database: iDatabase) {
 		this.database = database
 	}
 
-	public async add(order: iOrder): Promise<iOrder | undefined> {
+	public async add(order: iOrder): Promise<iOrder> {
+		if (order.id === undefined) {
+			order.id = v4()
+		}
 		this.database.orders.push(order)
 		return order
 	}

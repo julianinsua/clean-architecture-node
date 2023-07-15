@@ -1,10 +1,10 @@
 import type { iProduct } from 'src/entities/Product'
-import type { iRepo, iUseCase } from 'src/frameworks/repositories/contracts'
+import type { iProductRepo, iUseCase } from 'src/frameworks/repositories/contracts'
 
-export class UpdateProduct implements iUseCase<iProduct, iProduct | undefined> {
-	private readonly productRepo: iRepo<iProduct>
+export class UpdateProduct implements iUseCase<iProduct, Promise<iProduct | undefined>> {
+	private readonly productRepo: iProductRepo
 
-	constructor(productRepo: iRepo<iProduct>) {
+	constructor(productRepo: iProductRepo) {
 		if (productRepo === undefined) {
 			throw new Error('Forgot the product repo on the Add Product use case.')
 		}
@@ -17,7 +17,7 @@ export class UpdateProduct implements iUseCase<iProduct, iProduct | undefined> {
 			throw new Error("There's no add method on the product Repo")
 		}
 
-		const dbProduct = await this.productRepo.update(product)
+		const dbProduct = await this.productRepo.update(product as iProduct)
 		return dbProduct
 	}
 }

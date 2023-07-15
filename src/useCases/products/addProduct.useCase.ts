@@ -1,10 +1,11 @@
 import type { iProduct } from 'src/entities/Product'
-import type { iRepo, iUseCase } from 'src/frameworks/repositories/contracts'
+import type { iUseCase } from 'src/frameworks/repositories/contracts'
+import type { ProductsRepo } from 'src/frameworks/repositories/inMemory/products.repo'
 
 export class AddProduct implements iUseCase<iProduct, iProduct> {
-	private readonly productRepo: iRepo<iProduct>
+	private readonly productRepo: ProductsRepo
 
-	constructor(productRepo: iRepo<iProduct>) {
+	constructor(productRepo: ProductsRepo) {
 		if (productRepo === undefined) {
 			throw new Error('Forgot the product repo on the Add Product use case.')
 		}

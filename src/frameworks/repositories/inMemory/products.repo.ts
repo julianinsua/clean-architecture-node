@@ -1,5 +1,6 @@
 import { type iProduct } from 'src/entities/Product'
 import { type iDatabase, inMemoryDB } from 'src/frameworks/database/inMemory'
+import { v4 } from 'uuid'
 
 export class ProductsRepo {
 	private readonly database: iDatabase
@@ -9,6 +10,9 @@ export class ProductsRepo {
 	}
 
 	async add(product: iProduct): Promise<iProduct> {
+		if (product.id === undefined) {
+			product.id = v4()
+		}
 		this.database.products.push(product)
 		return product
 	}

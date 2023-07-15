@@ -8,9 +8,9 @@ export interface iUserRepo {
 	getById: (userId: string) => Promise<user | undefined>
 }
 
-export interface iProductRepo extends iRepo<iProduct> {
+export interface iProductRepo {
 	add: (product: iProduct) => Promise<iProduct>
-	update: (product: Partial<iProduct>) => Promise<iProduct | undefined>
+	update: (product: iProduct) => Promise<iProduct | undefined>
 	delete: (productId: string) => Promise<string | undefined>
 	getById: (productId: string) => Promise<iProduct | undefined>
 }
